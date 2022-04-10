@@ -31,16 +31,6 @@ function securityChecks(){
         alert('Пожалуйста введите имя игрока.')
         document.location.href = 'index.html'
     }
-
-    // Если уровень пройден переключать на следующий
-    try{
-        if (JSON.parse(localStorage.getItem('currentGame'))[currentLevel]){
-            alert('А-та-та!!! >:-(')
-            nextLevel(currentLevel)
-        }
-    }catch{
-
-    }
 }
 
 // Переход на следующий уровень
@@ -71,8 +61,11 @@ function makeExercise(figure, additional){
 
     let exerciesText = `Выберите все ${additional_} ${figure_}.`
 
+    if (currentLevel === 'level-2'){
+        exerciesText = `Выберите двойным нажатием все ${additional_} ${figure_}..`
+    }
     if (currentLevel === 'level-3'){
-        exerciesText = `Выберите все ${figure_} с ${additional_}.`
+        exerciesText = `Перетащите все ${figure_} с ${additional_}.`
     }
     
     exerciseField.innerHTML = `<p>${exerciesText}</p>
@@ -104,7 +97,7 @@ function endGame(){
     let players = JSON.parse(localStorage.getItem('players'))
     const currentPlayer = localStorage.getItem('currentPlayer')
 
-    // Сохранение предедущих результатов
+    // Сохранение предыдущих результатов
     if (players){
         players[currentPlayer] = localStorage.getItem('finalScore')
         localStorage.setItem('players', JSON.stringify(players))
@@ -188,8 +181,13 @@ function checkResult(timerOff = 0){
     localStorage.setItem('finalScore', finalScore)
 
     // Переход на слежующий уровень после подсчета результатов
-    alert('Вы перешли на новый уровень!')
+    if (currentLevel === 'level-3'){
+        alert('Игра окончена')
+        nextLevel(currentLevel)
+    }
+    else{alert('Вы перешли на новый уровень!')
     nextLevel(currentLevel)
+    }
 }
 
 // Отобразить результаты
