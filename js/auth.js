@@ -13,13 +13,13 @@ divLoginForm.innerHTML = `
         <form>
             <input type="radio" id="easy-level"
                     name="level-of-difficulty" value="easy">
-            <label for="easy-level">Легкий</label>
+            <label for="easy-level">Легкий(25 секунд)</label>
             <input type="radio" id="normal-level"
                     name="level-of-difficulty" value="normal" checked>
-            <label for="normal-level">Нормальный</label>
+            <label for="normal-level">Нормальный(15 секунд)</label>
             <input type="radio" id="normal-level"
                     name="level-of-difficulty" value="hard">
-            <label for="normal-level">Сложный</label>
+            <label for="normal-level">Сложный(5 секунд)</label>
         </form>
     </div>
     `

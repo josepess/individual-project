@@ -14,8 +14,8 @@ let selectedFigures = []
 let exercise = {figure:'', additional:''}
 // Параметры сложности
 const levelOfDifficultyArray = {
-    'easy': 15,
-    'normal': 10,
+    'easy': 25,
+    'normal': 15,
     'hard': 5
 }
 // Параметры игрового таймера
@@ -59,15 +59,14 @@ function makeExercise(figure, additional){
 
     let exerciseField = document.getElementById('exercise-field')
 
-    let exerciesText = `Выберите все ${additional_} ${figure_}.`
+    let exerciesText = `Выберите все <strong>${additional_} ${figure_}</strong>.`
 
     if (currentLevel === 'level-2'){
-        exerciesText = `Выберите двойным нажатием все ${additional_} ${figure_}..`
+        exerciesText = `Выберите двойным нажатием все <strong>${additional_} ${figure_}</strong>.`
     }
     if (currentLevel === 'level-3'){
-        exerciesText = `Перетащите все ${figure_} с ${additional_}.`
+        exerciesText = `Перетащите все <strong>${figure_}</strong> с <strong>${additional_}</strong>.`
     }
-    
     exerciseField.innerHTML = `<p>${exerciesText}</p>
     <div>
         <input type="button" id="submit-break-game" value="Завершить игру"/>
@@ -81,7 +80,7 @@ function makeExercise(figure, additional){
     // Закончить игру
     let submitBreakGame = document.getElementById('submit-break-game')
     submitBreakGame.onclick = function(){document.location.href = 'index.html'}
-
+    
     let obj = {}
     obj[currentLevel] = {figure: exercise['figure'], additional: exercise['additional']}
     localStorage.setItem('levelExercise', JSON.stringify(obj))
@@ -189,7 +188,11 @@ function checkResult(timerOff = 0){
     nextLevel(currentLevel)
     }
 }
+//Начать игру
+function startTimer(){
+levelTimer();
 
+}
 // Отобразить результаты
 function showScore(){
     let scoreField = document.getElementById("score-field")
@@ -224,7 +227,6 @@ function showScore(){
     let listPlayerScore = document.createElement('ul')
     const currentGame = JSON.parse(localStorage.getItem('currentGame'))
     for (let level in currentGame){
-        // console.log(currentGame[level])
         let liScore = document.createElement('li')
         liScore.id = 'listPlayerScore'
         liScore.innerHTML = `${level}<br/>
@@ -294,5 +296,4 @@ function changeTheme(theme){
     localStorage.setItem('colorTheme', theme)
     themeSelector()
 }
-
 themeSelector()

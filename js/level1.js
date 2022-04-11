@@ -72,5 +72,12 @@ function main(numberOfFigure){
     }
 
 }
-
-main(numberOfFigures)
+let exerciseFild = document.getElementById('exercise-field')
+exerciseFild.innerHTML = `<p>На данном уровне необходимо кликом выбрать фигуры определенного размера <br> На прохождение уровня дается ${levelTimeout} секунд</p>
+    <div>
+        <input type="button" id="submit-start" value="Начать"/>
+    </div>
+    `
+    let submitDone = document.getElementById('submit-start')
+    submitDone.onclick = function(){main(numberOfFigures)}
+//main(numberOfFigures)
